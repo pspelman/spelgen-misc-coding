@@ -62,8 +62,12 @@ var writeTweet = function(message){
   if(!visitor){
     throw new Error('set the global visitor property!');
   }
+  if(!streams.users[visitor]) {
+    streams.users[visitor] = [];
+  }
   var tweet = {};
   tweet.user = visitor;
   tweet.message = message;
+  tweet.created_at = new Date();
   addTweet(tweet);
 };
