@@ -5,13 +5,8 @@
     <script src="jquery.js"></script>
     <script src="dataGenerator.js"></script>
     <meta charset="utf-9">
-    <title>Triddler</title>
+    <title>The Triddler</title>
     <style>
-      .container {
-       border: 5px outset black;
-       background-color: green;
-       text-align: center;
-      }
       .buttons {
        border: 5px outset black;
        background-color: green;
@@ -25,35 +20,17 @@
     </style>
   </head>
   <body>
-
-  <div class='container'>
       <div class='buttons'>
-      <h1>Triddler</h1>
-      <button> id='btn1'>#btn1</button>
-      <button> id='btn2'>#btn2</button>
-      <button> id='btn3'>#btn3</button>
-      <button type="submit" name="teleporter" value="activate">Click to activate teleporter</button>
-    </div>
+      <h1>The Triddler</h1>
+      <button>Add Your Triddle</button>
+      <button>Do Something Cool</button>
+      <button type="submit" name="teleporter" value="activate">Activate Triddler</button>
   </div>
-
-    <div class='row'>
-      <div class='col-xs-3'>
-        <div id='panel1' class='panel panel-primary'>
-          <div class='panel-heading'>
-            #panel1
-          </div>
-          <div class='panel-body'>content
-          </div>
-        </div>
-        </div>
-    </div>
-
-    <h1>Triddler</h1>
-
 
     <script>
 
       $(document).ready(function(){
+
 
         $('body').on({
           mouseenter: function() {
@@ -62,6 +39,7 @@
           mouseleave: function() {
             $(this).css('background-color', 'purple');
           },
+
         });
 
 
@@ -70,37 +48,24 @@
         $body.html('Triddler: Triddle Me This').css({color: 'black', fontWeight:'bold', font: 10});
 
 
-
         var index = streams.home.length - 1;
 
         while(index >= 0){
 
-        // var tweetId = index;
-
-        //  var $tweetSpan = $('<span></span>'); // add to body
-
-        // $tweetSpan.css('color', 'red');
-        // $tweetSpan.text(`${tweetId}`);
-        // $tweetSpan.appendTo(body);
-
-          var tweet = streams.home[index]; //
-          var $tweet = $('<div></div>');
-          $tweet.text(`@ ${tweet.user} : ${tweet.message}`); // creating a div / container
+        var tweet = streams.home[index]; //
+        var $tweet = $('<div></div>');
+        $tweet.text(`@ ${tweet.user} : ${tweet.message}`); // creating a div / container
 
           $tweet.fadeToggle(3000).fadeOut(1000).fadeIn(3000).fadeToggle(3000).fadeOut(1000).fadeIn(3000).appendTo($body);
 
           index -= 1;
         }
 
-
-      $(function(){
-          $('btn#1').on('click',function(){
-            $('panel1').toggle();
-        });
       });
-    });
+
 
 </script>
+
 
 
 </body>
