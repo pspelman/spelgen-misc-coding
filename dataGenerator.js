@@ -27,11 +27,11 @@ var randomElement = function(array){
 };
 
 // random tweet generator
-var opening = ['just', '', '', '', '', 'ask me how i', 'completely', 'nearly', 'productively', 'efficiently', 'last night i', 'the president', 'that wizard', 'a ninja', 'a seedy old man'];
-var verbs = ['downloaded', 'interfaced', 'deployed', 'developed', 'built', 'invented', 'experienced', 'navigated', 'aided', 'enjoyed', 'engineered', 'installed', 'debugged', 'delegated', 'automated', 'formulated', 'systematized', 'overhauled', 'computed'];
+var opening = ['How did Obama', 'Why did Trump', 'Where did your cousin', 'Why did you', 'When did your dad', 'How did Hillary', 'Why did the cat', 'When did your friend', 'How productively did your boss', 'How efficiently did your mother', 'In what manner did you', 'Where did the wizard', 'How did you', 'Where did the ninja', 'How did a seedy old man'];
+var verbs = ['download', 'interface', 'deploy', 'develop', 'build', 'invent', 'experience', 'navigate', 'aid', 'enjoy', 'engineer', 'install', 'debug', 'delegate', 'automate', 'formulate', 'systematize', 'overhaul', 'compute'];
 var objects = ['my', 'your', 'the', 'a', 'my', 'an entire', 'this', 'that', 'the', 'the big', 'a new form of'];
-var nouns = ['cat', 'koolaid', 'system', 'city', 'worm', 'cloud', 'potato', 'money', 'way of life', 'belief system', 'security system', 'bad decision', 'future', 'life', 'pony', 'mind'];
-var tags = ['#techlife', '#burningman', '#sf', 'but only i know how', 'for real', '#sxsw', '#ballin', '#omg', '#yolo', '#magic', '', '', '', ''];
+var nouns = ['cat?', 'koolaid?', 'system?', 'city?', 'worm?', 'cloud?', 'potato?', 'money?', 'way of life?', 'belief system?', 'security system?', 'bad decision?', 'future?', 'life?', 'pony?', 'mind?'];
+var tags = ['#techlife', '#burningman', '#sf', '#but only i know how', '#for real', '#sxsw', '#ballin', '#omg', '#yolo', '#magic', '#woke', '#namaste', '#Kobe', '#Bravo 6'];
 
 var randomMessage = function(){
   return [randomElement(opening), randomElement(verbs), randomElement(objects), randomElement(nouns), randomElement(tags)].join(' ');

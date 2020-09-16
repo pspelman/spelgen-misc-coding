@@ -3,31 +3,44 @@
   <head>
     <script src="jquery.js"></script>
     <script src="dataGenerator.js"></script>
+    <meta charset="utf-8">
+    <title>Riddler</title>
   </head>
   <body>
+    <h1>Riddler</h1>
     <script>
 
       $(document).ready(function(){
 
         $('body').on({
           mouseenter: function() {
-            $(this).css('background-color', 'blue');
+            $(this).css('background-color', 'green');
           },
           mouseleave: function() {
-            $(this).css('background-color', 'white');
+            $(this).css('background-color', 'purple');
           },
         });
 
         var $body = $('body');
 
 
-        $body.html('');
+        $body.html('Riddler: Jokes for the Twafflicted...Twiddle Me This');
+
 
         var index = streams.home.length - 1;
         while(index >= 0){
+
+        var tweetId = index;
+
+        //  var $tweetSpan = $('<span></span>'); // add to body
+
+        // $tweetSpan.css('color', 'red');
+        // $tweetSpan.text(`${tweetId}`);
+        // $tweetSpan.appendTo(body);
+
           var tweet = streams.home[index]; //
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message); // creating a div / container - putting
+          $tweet.text(`@ ${tweet.user} : ${tweet.message}`); // creating a div / container
           $tweet.appendTo($body);
           index -= 1;
         }
@@ -39,4 +52,6 @@
 
 
   </body>
+
+
 </html>
