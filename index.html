@@ -31,7 +31,6 @@
 
       $(document).ready(function(){
 
-
         $('body').on({
           mouseenter: function() {
             $(this).css('background-color', 'green');
@@ -41,7 +40,6 @@
           },
 
         });
-
 
         var $body = $('body');
 
@@ -54,7 +52,7 @@
 
         var tweet = streams.home[index]; //
         var $tweet = $('<div></div>');
-        $tweet.text(`@ ${tweet.user} : ${tweet.message}`); // creating a div / container
+        $tweet.text(`@ ${tweet.user} : ${tweet.message} ${tweet.created_at}`); // creating a div / container
 
           $tweet.fadeToggle(3000).fadeOut(1000).fadeIn(3000).fadeToggle(3000).fadeOut(1000).fadeIn(3000).appendTo($body);
 
