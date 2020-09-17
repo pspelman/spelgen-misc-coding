@@ -1,67 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <link rel="stylesheet" href="main.css">
     <script src="jquery.js"></script>
     <script src="dataGenerator.js"></script>
     <meta charset="utf-9">
     <title>The Triddler</title>
     <style>
-      .buttons {
-       border: 5px outset black;
-       background-color: green;
-       text-align: center;
-      }
-      .row {
-       border: 5px outset black;
-       background-color: green;
-       text-align: center;
-      }
+        .buttons {
+            border: 5px outset black;
+            background-color: green;
+            text-align: center;
+        }
+
+        .row {
+            border: 5px outset black;
+            background-color: green;
+            text-align: center;
+        }
     </style>
-  </head>
-  <body>
-      <div class='buttons'>
-      <h1>The Triddler</h1>
-      <button>Add Your Triddle</button>
-      <button>Do Something Cool</button>
-      <button type="submit" name="teleporter" value="activate">Activate Triddler</button>
-  </div>
+</head>
+<body>
+<div class='buttons'>
+    <h1>The Triddler</h1>
+    <button>Add Your Triddle</button>
+    <button>Do Something Cool</button>
+    <button type="submit" name="teleporter" value="activate">Activate Triddler</button>
+</div>
 
-    <script>
+<script>
 
-      $(document).ready(function(){
+    $(document).ready(function () {
 
 
         $('body').on({
-          mouseenter: function() {
-            $(this).css('background-color', 'green');
-          },
-          mouseleave: function() {
-            $(this).css('background-color', 'purple');
-          },
+            mouseenter: function () {
+                $(this).css('background-color', 'green');
+            },
+            mouseleave: function () {
+                $(this).css('background-color', 'purple');
+            },
 
         });
 
 
         var $body = $('body');
 
-        $body.html('Triddler: Triddle Me This').css({color: 'black', fontWeight:'bold', font: 10});
+        $body.html('Triddler: Triddle Me This').css({color: 'black', fontWeight: 'bold', font: 10});
 
 
         var index = streams.home.length - 1;
 
-        while(index >= 0){
+        while (index >= 0) {
+            let tweet = streams.home[index]; //
+            let $tweetDiv = $('<div></div>');
+            $tweetDiv.text(`@ ${tweet.user} : ${tweet.message} ${tweet.created_at}`); // creating a div / container
+            // $tweetDiv.fadeToggle(3000).fadeOut(1000).fadeIn(3000).fadeToggle(3000).fadeOut(1000).fadeIn(3000).appendTo($body);
+            // $tweetDiv.fadeToggle(3000).fadeOut(1000).fadeIn(3000).fadeToggle(3000).fadeOut(1000).fadeIn(3000);
+            $tweetDiv.fadeToggle(3000);
+            $tweetDiv.appendTo($body);
 
-        var tweet = streams.home[index]; //
-        var $tweet = $('<div></div>');
-        $tweet.text(`@ ${tweet.user} : ${tweet.message}`); // creating a div / container
-
-          $tweet.fadeToggle(3000).fadeOut(1000).fadeIn(3000).fadeToggle(3000).fadeOut(1000).fadeIn(3000).appendTo($body);
-
-          index -= 1;
+            index -= 1;
         }
 
-      });
+    });
 
 
 </script>
