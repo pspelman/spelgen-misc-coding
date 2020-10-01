@@ -1,76 +1,118 @@
-<!DOCTYPE html>
+<!DOCTYPE html> // this is html
 <html>
+
 <head>
-    <link rel="stylesheet" href="main.css">
-    <script src="jquery.js"></script>
-    <script src="dataGenerator.js"></script>
-    <meta charset="utf-9">
-    <title>The Triddler</title>
-    <style>
-        .buttons {
-            border: 5px outset black;
-            background-color: green;
-            text-align: center;
-        }
-
-        .row {
-            border: 5px outset black;
-            background-color: green;
-            text-align: center;
-        }
-    </style>
+    <script src="jquery.js"></script> // run it
+    <script src="dataGenerator.js"></script> // run it
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-<div class='buttons'>
-    <h1>The Triddler</h1>
-    <button>Add Your Triddle</button>
-    <button>Do Something Cool</button>
-    <button type="submit" name="teleporter" value="activate">Activate Triddler</button>
-</div>
+    <script>
+        // we're in html but we're going to run JS  - it's like having another js file
+        // <script src="app.js"> // 
+        $(document).ready(function() { // global scope of html file - when the html (Document Object Model) finishes loading in the browser. The function is invoked immediately after the DOM finishes loading. 
+            var $body = $('body'); // declare body variable (jquery variable - $body - can use all JQ methods on it) - $ magic function in Jquery - two use cases determine by 1) CSS selector - #id, .class     or     2)            goes to DOM and looks for a match - puts it inside a jquery array  
+            $body.html(''); // removes html from the page - we're practicing  Jquery not hard coding into the html 
+            // console.log($('div')) // logs elements from a jquery array 
 
-<script>
+            // --------------
+            // Create Button 
+            // --------------
+            var $title = $('<h1></h1>');
+            $title.text('Twiddlers be twiddling');
+            // create a button 
+            var $button = $('<button></button>');
+            // give the button some text 
+            $button.text('Get Twiddles');
+            // append the button to the body
+            $button.appendTo($body);
 
-    $(document).ready(function () {
+            var $tweetContainer = $('<div class="tweet-container"></div>');
+            $tweetContainer.appendTo($body);
+
+            // if renderTweets recieves a username(string) as input, it should render only tweets from that user 
+            // else - no input, it should render the home stream of tweets 
+
+            var renderTweets = function(username) {
+                // create a stream variable 
+                var stream;
+                // if username is not provided
+                if (!username) {
+                    // set stream to be the home stream 
+                    stream = streams.home;
+                    // if username IS provided
+                } else {
+                    stream = streams.users[username];
+                }
+                // set stream to be the specified user's stream 
 
 
-        $('body').on({
-            mouseenter: function () {
-                $(this).css('background-color', 'green');
-            },
-            mouseleave: function () {
-                $(this).css('background-color', 'purple');
-            },
+                var index = stream.length - 1; // go to streams.home.length - 1 (last tweet) - the # of tweets 
+                while (index >= 0) {
+                    var humanTime = moment(new Date()).fromNow();
+                    var tweet = stream[index]; // create a variable - select the most recent tweet added to the streams array - not jquery - just data 
+                    var $tweet = $('<div></div>'); // this is not data - this is a UI element - all Jquery 
+                    var $username = $('<div class="username"></div>');
+                    var $message = $('<p class="message"></p>');
+                    var $timeStamp = $('<div class="timeStamp"></div>');
 
+                    $username.text(`@${tweet.user}`);
+                    $message.text(tweet.message);
+                    $timeStamp.text(humanTime);
+
+                    $username.appendTo($tweet);
+                    $message.appendTo($tweet);
+                    $timeStamp.appendTo($tweet);
+                    $tweet.appendTo($tweetContainer);
+                    index -= 1;
+
+
+                    // $tweet.text('@' + tweet.user + ': ' + tweet.message); // turning it into a string 
+                    // $tweet.appendTo($tweetContainer); // put the content on the DOM - putting the lego on the lego board 
+                    // index -= 1; // we could build a bigger structure first - a set of lego blocks - before putting them onto the board - DOM 
+                }
+            };
+
+            renderTweets();
+
+
+
+
+            // ---------------------
+            // Make Button Clickable  
+            // ---------------------
+
+            // listen for events and handle the events when a user interacts with your site 
+
+            var buttonClickHandler = function() { // a way to write it without using inline function 
+                // console.log('I done got clicked!');
+                // clear the container of old tweets 
+                $tweetContainer.html(''); // move tweets to another container
+                // iterate through the home stream
+                // render a tweet UI element 
+                renderTweets();
+            };
+
+            // inline example 
+            //  $button.on('click', function (){
+            //  do something
+            //  }); 
+
+            // attach a click event listener to the button 
+            // $button.on('click');  listening.......... 
+            $button.on('click', buttonClickHandler);
+            // create an event handler function to be invoked upon button click 
+
+            $('.tweet-container').on('click', '.username', function(event) { // event delegation 
+                var user = event.target.innerHTML.slice(1);
+                console.log(user);
+                $tweetContainer.html('');
+                renderTweets(user);
+            });
         });
-
-
-        var $body = $('body');
-
-        $body.html('Triddler: Triddle Me This').css({color: 'black', fontWeight: 'bold', font: 10});
-
-
-        var index = streams.home.length - 1;
-
-        while (index >= 0) {
-            let tweet = streams.home[index]; //
-            let $tweetDiv = $('<div></div>');
-            $tweetDiv.text(`@ ${tweet.user} : ${tweet.message} ${tweet.created_at}`); // creating a div / container
-            // $tweetDiv.fadeToggle(3000).fadeOut(1000).fadeIn(3000).fadeToggle(3000).fadeOut(1000).fadeIn(3000).appendTo($body);
-            // $tweetDiv.fadeToggle(3000).fadeOut(1000).fadeIn(3000).fadeToggle(3000).fadeOut(1000).fadeIn(3000);
-            $tweetDiv.fadeToggle(3000);
-            $tweetDiv.appendTo($body);
-
-            index -= 1;
-        }
-
-    });
-
-
-</script>
-
-
-
+    </script>
 </body>
-
 
 </html>
